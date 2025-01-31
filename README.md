@@ -1,3 +1,5 @@
+![Github Explorer](/src/assets/images/Logo.png "Github Explorer Logo")
+
 # GitHub Explorer
 
 GitHub Explorer is a powerful web application designed to enhance your GitHub experience. With GitHub Explorer, you can effortlessly search for users and repositories, and gain valuable insights into projects.
@@ -8,10 +10,10 @@ GitHub Explorer is a powerful web application designed to enhance your GitHub ex
     - Project Information: Access comprehensive information about repositories, including stars, forks, and contributors.
 
 ## Getting Started
-To get started with GitHub Explorer, follow these steps:
-    1. Clone the repository: git clone [https://github.com/yourusername/github-explorer.git](https://github.com/mrhero05/github-explorer.git)
-    2. Navigate to the project directory: `cd github-explorer`
-    3. Install dependencies: `npm install`
+To get started with GitHub Explorer, follow these steps:<br>
+    1. Clone the repository: git clone [https://github.com/yourusername/github-explorer.git](https://github.com/mrhero05/github-explorer.git)<br>
+    2. Navigate to the project directory: `cd github-explorer`<br>
+    3. Install dependencies: `npm install`<br>
     4. Start the application on you local environment: `npm run dev`
 
 
