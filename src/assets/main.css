@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Fonts */
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('/src/assets/fonts/Montserrat/static/Montserrat-Regular.ttf');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: url('/src/assets/fonts/Montserrat/static/Montserrat-Medium.ttf');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url('/src/assets/fonts/Montserrat/static/Montserrat-Bold.ttf');
+    font-display: swap;
+}
