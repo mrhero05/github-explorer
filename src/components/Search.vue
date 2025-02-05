@@ -34,11 +34,12 @@
                     <span class="-bg--ge-white p-[5px_15px] rounded-[20px]">Top</span><p class="-text--ge-white">Top User Search</p>
                     <font-awesome-icon class="ml-auto -text--ge-white text-[1.5rem]" :icon="['fas', 'star']" />
                 </div>
-                <UserData :data="data" :item-to-show="itemToShow"/>
-                <LoadMoreBtn :data="data" :item-to-show="itemToShow" @loadMore="LoadMore" />
+                <UserData :user-data="userData" :item-to-show="userItemToShow"/>
+                <LoadMoreBtn :data="userData" :item-to-show="userItemToShow" @loadMore="userLoadMore" />
                 <!-- For Repository Fetch Section -->
                 <h2 class="text-[1.3rem] font-bold">Repositories</h2>
-                <RepositoryData />
+                <RepositoryData :repo-data="repoData" :item-to-show="repoItemToShow" />
+                <LoadMoreBtn :data="repoData" :item-to-show="repoItemToShow" @loadMore="repoLoadMore" />
             </div>
             <form method="dialog" class="modal-backdrop">
                 <button>close</button>
@@ -54,14 +55,23 @@
     import axios from 'axios';
     import { ref } from 'vue';
 
-    const data = ref(null);
+    const userData = ref(null);
+    const repoData = ref(null);
     const userInput = ref('');
-    const itemToShow = ref(5);
+    const userItemToShow = ref(5);
+    const repoItemToShow = ref(5);
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://api.github.com/search/users?q=' + userInput.value);
-            data.value = response.data.items;
+            // fetch via github user api
+            const userResponse = await axios.get('https://api.github.com/search/users?q=' + userInput.value);
+            userData.value = userResponse.data.items;
+            // fetch via github repository api
+            const repoResponse = await axios.get('https://api.github.com/search/repositories?q=' + userInput.value);
+            repoData.value = repoResponse.data.items;
+            // restore the itemToShow value to default
+            userItemToShow.value = 5;
+            repoItemToShow.value = 5;
             // console.log(data.value);
         } catch (error) {
             console.log(error);
@@ -69,7 +79,11 @@
     }
     const debounceFetchData = useDebounceFn(fetchData, 1000);
 
-    const LoadMore = () => {
-        itemToShow.value += 5;
+    const userLoadMore = () => {
+        userItemToShow.value += 5;
+    }
+
+    const repoLoadMore = () => {
+        repoItemToShow.value += 5;
     }
 </script>

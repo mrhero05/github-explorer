@@ -14,6 +14,7 @@ export default {
         '--ge-icon-gray': '#a5a5a5',
         '--ge-gray': '#909090',
         '--ge-blue': '#2647FF',
+        '--ge-sky-blue': '#68bfff',
         '--ge-white': '#ffffff',
         '--ge-black': '#000000',
     },
