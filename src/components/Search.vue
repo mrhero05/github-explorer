@@ -37,7 +37,7 @@
                 <UserData :user-data="userData" :item-to-show="userItemToShow"/>
                 <LoadMoreBtn :data="userData" :item-to-show="userItemToShow" @loadMore="userLoadMore" />
                 <!-- For Repository Fetch Section -->
-                <h2 class="text-[1.3rem] font-bold">Repositories</h2>
+                <h2 class="text-[1.3rem] font-bold my-4">Repositories</h2>
                 <RepositoryData :repo-data="repoData" :item-to-show="repoItemToShow" />
                 <LoadMoreBtn :data="repoData" :item-to-show="repoItemToShow" @loadMore="repoLoadMore" />
             </div>
@@ -64,11 +64,16 @@
     const fetchData = async () => {
         try {
             // fetch via github user api
-            const userResponse = await axios.get('https://api.github.com/search/users?q=' + userInput.value);
-            userData.value = userResponse.data.items;
-            // fetch via github repository api
-            const repoResponse = await axios.get('https://api.github.com/search/repositories?q=' + userInput.value);
-            repoData.value = repoResponse.data.items;
+            if (userInput.value.trim() !== '') {
+                const userResponse = await axios.get('https://api.github.com/search/users?q=' + userInput.value);
+                userData.value = userResponse.data.items;
+                // fetch via github repository api
+                const repoResponse = await axios.get('https://api.github.com/search/repositories?q=' + userInput.value);
+                repoData.value = repoResponse.data.items;
+            }else{
+                userData.value = null;
+                repoData.value = null;
+            }
             // restore the itemToShow value to default
             userItemToShow.value = 5;
             repoItemToShow.value = 5;
