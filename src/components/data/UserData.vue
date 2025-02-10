@@ -3,7 +3,8 @@
     name: 'UserContent',
     params: { username: user.login },
     query: {
-        avatar: user.avatar_url
+        avatar: user.avatar_url,
+        github_url: user.html_url,
     }
     }" class="flex items-center p-[10px_15px] rounded-[10px] gap-x-[10px] my-4 hover:outline hover:-outline--ge-sky-blue hover:cursor-pointer hover:-text--ge-sky-blue transition-[all_150ms_ease]" v-if="userData" v-for="user in userData.slice(0, itemToShow)">
         <font-awesome-icon class="" :icon="['fas', 'hashtag']" />
@@ -20,4 +21,5 @@
         userData: Array,
         itemToShow: Number
     });
+
 </script>

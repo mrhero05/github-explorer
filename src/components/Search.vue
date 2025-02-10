@@ -63,8 +63,8 @@
 
     const fetchData = async () => {
         try {
-            // fetch via github user api
             if (userInput.value.trim() !== '') {
+                // fetch via github user api
                 const userResponse = await axios.get('https://api.github.com/search/users?q=' + userInput.value);
                 userData.value = userResponse.data.items;
                 // fetch via github repository api
@@ -77,7 +77,7 @@
             // restore the itemToShow value to default
             userItemToShow.value = 5;
             repoItemToShow.value = 5;
-            // console.log(data.value);
+            console.log(userData.value);
         } catch (error) {
             console.log(error);
         }

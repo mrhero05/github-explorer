@@ -6,7 +6,7 @@
                     <img :src="avatar" alt="profile_logo" />
                 </div>
             </div>
-            <h2 class="-text--ge-black text-[2rem] font-bold font-MontserratBold text-center my-2">{{ username }}</h2>
+            <a :href="github_url" target="_blank" class="-text--ge-black text-[2rem] font-bold font-MontserratBold my-2 mx-auto block w-fit hover:underline">{{ username }}</a>
         </div>
         <div class="w-full md:w-9/12">
             <p>123</p>
@@ -15,20 +15,33 @@
 </template>
 
 <script setup>
-    import { defineProps, ref, watch } from 'vue';
+    import axios from 'axios';
+    import { defineProps, ref, computed, onBeforeUpdate, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
+
     const route = useRoute();
-
-    const avatar = ref(route.query.avatar);
-
-    watch(
-        () => route.query.avatar,
-        (newAvatar) =>{
-            avatar.value = newAvatar;
-        }
-    );
+    const avatar = computed( () => route.query.avatar);
+    const github_url = computed( () => route.query.github_url);
 
     const props = defineProps({
-        username: String,
+        username: String
     });
+
+    // Fetch More Information of Selected user
+    const fetch = async (username) => {
+        try {
+            // const moreInfo = await axios.get(`https://api.github.com/users/${username}/followers`);
+            console.log(`https://api.github.com/users/${username}/followers`);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    onBeforeUpdate(() => {
+        fetch(props.username);
+    })
+
+    onMounted(() => {
+        fetch(props.username);
+    })
 </script>
