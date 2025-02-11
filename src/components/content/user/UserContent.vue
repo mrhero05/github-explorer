@@ -7,6 +7,8 @@
                 </div>
             </div>
             <a :href="github_url" target="_blank" class="-text--ge-black text-[2rem] font-bold font-MontserratBold my-2 mx-auto block w-fit hover:underline">{{ username }}</a>
+            <p>{{ followers }} followers</p>
+            <p>{{ following }} following</p>
         </div>
         <div class="w-full md:w-9/12">
             <p>123</p>
@@ -16,12 +18,13 @@
 
 <script setup>
     import axios from 'axios';
-    import { defineProps, ref, computed, onBeforeUpdate, onMounted } from 'vue';
+    import { defineProps, ref, toRefs, computed, onBeforeUpdate, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
 
     const route = useRoute();
     const avatar = computed( () => route.query.avatar);
     const github_url = computed( () => route.query.github_url);
+    const [followers, following] = [ref(0), ref(0)];
 
     const props = defineProps({
         username: String
@@ -30,8 +33,13 @@
     // Fetch More Information of Selected user
     const fetch = async (username) => {
         try {
-            // const moreInfo = await axios.get(`https://api.github.com/users/${username}/followers`);
-            console.log(`https://api.github.com/users/${username}/followers`);
+            // Fetch user followers
+            const getFollowers = await axios.get(`https://api.github.com/users/${username}/followers`);
+            // Fetch user following
+            const getFollowing = await axios.get(`https://api.github.com/users/${username}/following`);
+            followers.value = getFollowers.data.length;
+            following.value = getFollowing.data.length;
+
         } catch (error) {
             console.log(error);
         }
