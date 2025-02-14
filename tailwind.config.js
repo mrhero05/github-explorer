@@ -15,6 +15,8 @@ export default {
         '--ge-gray': '#909090',
         '--ge-blue': '#2647FF',
         '--ge-sky-blue': '#68bfff',
+        '--ge-light-blue': '#2FC7E5',
+        '--ge-pink': '#E069F7',
         '--ge-white': '#ffffff',
         '--ge-black': '#000000',
     },
