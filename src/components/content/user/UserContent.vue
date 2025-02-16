@@ -33,6 +33,7 @@
             <div class="flex gap-[20px] my-4 flex-wrap">
                 <UserRepository :username="username" />
             </div>
+                <UserContribution />
         </div>
     </div>
 </template>
@@ -40,6 +41,7 @@
 <script setup>
     import axios from 'axios';
     import UserRepository from '@/components/content/user/UserRepository.vue';
+    import UserContribution from '@/components/content/user/UserContribution.vue';
     import { defineProps, ref, toRefs, computed, watch, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
 
@@ -67,6 +69,7 @@
 
             // Declare each data
             info.value = getInfo.data;
+            console.log(info.value);
             followers.value = getFollowers.data.length;
             following.value = getFollowing.data.length;
 
