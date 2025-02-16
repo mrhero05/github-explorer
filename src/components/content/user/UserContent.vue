@@ -33,7 +33,7 @@
             <div class="flex gap-[20px] my-4 flex-wrap">
                 <UserRepository :username="username" />
             </div>
-                <UserContribution />
+                <UserContribution :username="username" />
         </div>
     </div>
 </template>
@@ -69,7 +69,6 @@
 
             // Declare each data
             info.value = getInfo.data;
-            console.log(info.value);
             followers.value = getFollowers.data.length;
             following.value = getFollowing.data.length;
 

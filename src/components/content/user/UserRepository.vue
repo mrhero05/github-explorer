@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col border -border--ge-gray shadow-[1px_1px_2px_1px_rgba(0,0,0,0.25)] p-[20px] rounded-[10px] w-full md:w-[calc(50%-10px)]" v-for="repo in userRepository.data.slice(0, repoItemToShow)" v-if="userRepository.data">
+    <div class="flex flex-col border -border--ge-gray shadow-[1px_1px_2px_1px_rgba(0,0,0,0.25)] p-[20px] rounded-[10px] w-full md:w-[calc(50%-10px)]" v-for="repo in userRepository.data.slice(0, repoItemToShow)" v-if="!userRepository.length == 0">
         <div class="flex items-center gap-x-[10px]">
             <font-awesome-icon :icon="['fas', 'book-bookmark']" />
             <a :href="repo.html_url" target="_blank" class="-text--ge-light-blue text-[1.2rem] font-MontserratBold text-ellipsis overflow-hidden whitespace-nowrap hover:underline">{{ repo.name }}</a>
@@ -10,7 +10,10 @@
             <p v-if="repo.language" class="flex mt-auto gap-x-[5px] items-center before:content-[''] before:w-[15px] before:h-[15px] before:-bg--ge-pink before:block before:rounded-box text-[0.8rem]">{{ repo.language }}</p>
             <div class="ml-auto flex items-center">
                 <div class="mx-2 flex items-center gap-x-[5px]">
-                    <font-awesome-icon :icon="['far', 'star']" /><p>{{ repo.stargazers_count }}</p>
+                    <div class="tooltip" :data-tip="'⭐'+repo.stargazers_count +' starred this repo'">
+                        <font-awesome-icon :icon="['far', 'star']" />
+                    </div>
+                    <p>{{ repo.stargazers_count }}</p>
                 </div>
                 <div class="mx-2 flex items-center gap-x-[5px]">
                     <font-awesome-icon :icon="['fas', 'code-fork']" /><p>{{ repo.forks_count }}</p>
@@ -20,6 +23,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div v-else>
+        No Repository Available
     </div>
     <LoadMoreBtn :data="userRepository.data" :item-to-show="repoItemToShow" @loadMore="repoLoadMore" />
 </template>
