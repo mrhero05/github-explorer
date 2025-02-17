@@ -53,6 +53,9 @@
                 };
             });
 
+            // Reset the loadmore count
+            eventItemToShow.value = 4;
+
         } catch (error) {
             console.log(error);
         }

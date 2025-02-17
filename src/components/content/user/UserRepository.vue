@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col border -border--ge-gray shadow-[1px_1px_2px_1px_rgba(0,0,0,0.25)] p-[20px] rounded-[10px] w-full md:w-[calc(50%-10px)]" v-for="repo in userRepository.data.slice(0, repoItemToShow)" v-if="!userRepository.length == 0">
+    <div class="flex flex-col border -border--ge-gray shadow-[1px_1px_2px_1px_rgba(0,0,0,0.25)] p-[20px] rounded-[10px] w-full md:w-[calc(50%-10px)]" v-if="Array.isArray(userRepository.data) && userRepository.data.length > 0" v-for="repo in userRepository.data.slice(0, repoItemToShow)">
         <div class="flex items-center gap-x-[10px]">
             <font-awesome-icon :icon="['fas', 'book-bookmark']" />
             <a :href="repo.html_url" target="_blank" class="-text--ge-light-blue text-[1.2rem] font-MontserratBold text-ellipsis overflow-hidden whitespace-nowrap hover:underline">{{ repo.name }}</a>
@@ -16,10 +16,16 @@
                     <p>{{ repo.stargazers_count }}</p>
                 </div>
                 <div class="mx-2 flex items-center gap-x-[5px]">
-                    <font-awesome-icon :icon="['fas', 'code-fork']" /><p>{{ repo.forks_count }}</p>
+                    <div class="tooltip" :data-tip="'🔁'+repo.forks_count +' forked this repo'">
+                        <font-awesome-icon :icon="['fas', 'code-fork']" />
+                    </div>
+                    <p>{{ repo.forks_count }}</p>
                 </div>
                 <div class="mx-2 flex items-center gap-x-[5px]">
-                    <font-awesome-icon :icon="['far', 'eye']" /><p>{{ repo.watchers_count }}</p>
+                    <div class="tooltip" :data-tip="'👁️'+repo.watchers_count +' watcher on this repo'">
+                        <font-awesome-icon :icon="['far', 'eye']" />
+                    </div>
+                    <p>{{ repo.watchers_count }}</p>
                 </div>
             </div>
         </div>
@@ -49,9 +55,9 @@
                 axios.get(`https://api.github.com/users/${username}/repos`),
 
             ]);
-
+            repoItemToShow.value = 4;
             userRepository.value = getUserRepository;
-            // console.log(userRepository.value);
+            console.log(userRepository.value);
         } catch (error) {
             console.log(error);
         }
