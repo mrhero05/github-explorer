@@ -77,7 +77,7 @@
             // restore the itemToShow value to default
             userItemToShow.value = 5;
             repoItemToShow.value = 5;
-            console.log(userData.value);
+            console.log(repoData.value);
         } catch (error) {
             console.log(error);
         }

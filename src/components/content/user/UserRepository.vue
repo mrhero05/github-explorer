@@ -7,7 +7,11 @@
         </div>
         <p class="line-clamp-3 my-3">{{ repo.description }}</p>
         <div class="flex items-center mt-auto">
-            <p v-if="repo.language" class="flex mt-auto gap-x-[5px] items-center before:content-[''] before:w-[15px] before:h-[15px] before:-bg--ge-pink before:block before:rounded-box text-[0.8rem]">{{ repo.language }}</p>
+            <div class="tooltip" data-tip="Primary language used in this project">
+                <p v-if="repo.language" class="flex mt-auto gap-x-[5px] items-center before:content-[''] before:w-[15px] before:h-[15px] before:-bg--ge-pink before:block before:rounded-box text-[0.8rem]">
+                    {{ repo.language }}
+                </p>
+            </div>
             <div class="ml-auto flex items-center">
                 <div class="mx-2 flex items-center gap-x-[5px]">
                     <div class="tooltip" :data-tip="'⭐'+repo.stargazers_count +' starred this repo'">
@@ -57,7 +61,7 @@
             ]);
             repoItemToShow.value = 4;
             userRepository.value = getUserRepository;
-            console.log(userRepository.value);
+            // console.log(userRepository.value);
         } catch (error) {
             console.log(error);
         }
