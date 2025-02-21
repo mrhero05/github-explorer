@@ -2,7 +2,7 @@
     <div v-if="repoData" class="max-w-[400px] md:max-w-[1140px] mx-auto flex flex-wrap md:mt-[50px]">
         <div class="flex gap-x-[20px] items-center justify-center md:justify-start w-full md:w-8/12">
             <img class="w-[80px] rounded-full" :src="repoData.owner.avatar_url" alt="Github User Profile">
-            <div class="flex flex-col text-base">
+            <div class="flex flex-col">
                 <p class="font-MontserratBold text-[2rem] line-clamp-1">{{ repoData.name }}</p>
                 <p class="">{{ repoData.owner.login }}</p>
             </div>
@@ -22,11 +22,18 @@
                 <p>Watching 1</p>
             </div>
         </div>
+        <section class="flex flex-row flex-wrap gap-[10px] my-4">
+            <p class="-bg--ge-white-gray p-[1px_20px] rounded-[15px]" v-for="(lang, langIndex) in repoLanguanges" :key="langIndex">{{ langIndex }}</p>
+        </section>
+        <section>
+            <RepoFile />
+        </section>
     </div>
 </template>
 
 <script setup>
     import { defineProps, ref, onMounted, watch } from 'vue';
+    import RepoFile from '@/components/content/repo/RepoFile.vue';
     import axios from 'axios';
 
     const props = defineProps({
@@ -34,14 +41,22 @@
     })
 
     const repoData = ref(null);
+    const repoLanguanges = ref(null);
 
     const fetch = async (repoName) => {
         try {
+            // fetch all repo data
             const [getRepoInfo] = await Promise.all([
                 axios.get(`https://api.github.com/repos/${repoName}`),
             ]);
+            const [getRepoLanguages] = await Promise.all([
+                axios.get(getRepoInfo.data.languages_url)
+            ]);
+
+            // Set data per variables
             repoData.value = getRepoInfo.data;
-            console.log(repoData.value);
+            repoLanguanges.value = getRepoLanguages.data;
+            console.log(repoLanguanges.value);
         } catch (error) {
             console.log(error);
         }
