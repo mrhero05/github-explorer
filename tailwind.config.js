@@ -13,6 +13,7 @@ export default {
         '--ge-white-gray': '#F4F4F4',
         '--ge-icon-gray': '#a5a5a5',
         '--ge-gray': '#909090',
+        '--ge-gray2': '#888888',
         '--ge-blue': '#2647FF',
         '--ge-sky-blue': '#68bfff',
         '--ge-light-blue': '#2FC7E5',

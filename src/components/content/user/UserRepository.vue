@@ -1,45 +1,3 @@
-<template>
-    <div class="flex flex-col border -border--ge-gray shadow-[1px_1px_2px_1px_rgba(0,0,0,0.25)] p-[20px] rounded-[10px] w-full md:w-[calc(50%-10px)]" v-if="Array.isArray(userRepository.data) && userRepository.data.length > 0" v-for="repo in userRepository.data.slice(0, repoItemToShow)">
-        <div class="flex items-center gap-x-[10px]">
-            <font-awesome-icon :icon="['fas', 'book-bookmark']" />
-            <a :href="repo.html_url" target="_blank" class="-text--ge-light-blue text-[1.2rem] font-MontserratBold text-ellipsis overflow-hidden whitespace-nowrap hover:underline">{{ repo.name }}</a>
-            <p class="ml-auto border -border--ge-gray rounded-[50px] px-[10px] -text--ge-gray">Public</p>
-        </div>
-        <p class="line-clamp-3 my-3">{{ repo.description }}</p>
-        <div class="flex items-center mt-auto">
-            <div class="tooltip" data-tip="Primary language used in this project">
-                <p v-if="repo.language" class="flex mt-auto gap-x-[5px] items-center before:content-[''] before:w-[15px] before:h-[15px] before:-bg--ge-pink before:block before:rounded-box text-[0.8rem]">
-                    {{ repo.language }}
-                </p>
-            </div>
-            <div class="ml-auto flex items-center">
-                <div class="mx-2 flex items-center gap-x-[5px]">
-                    <div class="tooltip" :data-tip="'⭐'+repo.stargazers_count +' starred this repo'">
-                        <font-awesome-icon :icon="['far', 'star']" />
-                    </div>
-                    <p>{{ repo.stargazers_count }}</p>
-                </div>
-                <div class="mx-2 flex items-center gap-x-[5px]">
-                    <div class="tooltip" :data-tip="'🔁'+repo.forks_count +' forked this repo'">
-                        <font-awesome-icon :icon="['fas', 'code-fork']" />
-                    </div>
-                    <p>{{ repo.forks_count }}</p>
-                </div>
-                <div class="mx-2 flex items-center gap-x-[5px]">
-                    <div class="tooltip" :data-tip="'👁️'+repo.watchers_count +' watcher on this repo'">
-                        <font-awesome-icon :icon="['far', 'eye']" />
-                    </div>
-                    <p>{{ repo.watchers_count }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div v-else>
-        No Repository Available
-    </div>
-    <LoadMoreBtn :data="userRepository.data" :item-to-show="repoItemToShow" @loadMore="repoLoadMore" />
-</template>
-
 <script setup>
     import axios from 'axios';
     import LoadMoreBtn from '@/components/data/LoadMoreBtn.vue';
@@ -81,3 +39,45 @@
     })
 
 </script>
+
+<template>
+    <div class="flex flex-col border -border--ge-gray shadow-[1px_1px_2px_1px_rgba(0,0,0,0.25)] p-[20px] rounded-[10px] w-full md:w-[calc(50%-10px)]" v-if="Array.isArray(userRepository.data) && userRepository.data.length > 0" v-for="repo in userRepository.data.slice(0, repoItemToShow)">
+        <div class="flex items-center gap-x-[10px]">
+            <font-awesome-icon :icon="['fas', 'book-bookmark']" />
+            <a :href="repo.html_url" target="_blank" class="-text--ge-light-blue text-[1.2rem] font-MontserratBold text-ellipsis overflow-hidden whitespace-nowrap hover:underline">{{ repo.name }}</a>
+            <p class="ml-auto border -border--ge-gray rounded-[50px] px-[10px] -text--ge-gray">Public</p>
+        </div>
+        <p class="line-clamp-3 my-3">{{ repo.description }}</p>
+        <div class="flex items-center mt-auto">
+            <div class="tooltip" data-tip="Primary language used in this project">
+                <p v-if="repo.language" class="flex mt-auto gap-x-[5px] items-center before:content-[''] before:w-[15px] before:h-[15px] before:-bg--ge-pink before:block before:rounded-box text-[0.8rem]">
+                    {{ repo.language }}
+                </p>
+            </div>
+            <div class="ml-auto flex items-center">
+                <div class="mx-2 flex items-center gap-x-[5px]">
+                    <div class="tooltip" :data-tip="'⭐'+repo.stargazers_count +' starred this repo'">
+                        <font-awesome-icon :icon="['far', 'star']" />
+                    </div>
+                    <p>{{ repo.stargazers_count }}</p>
+                </div>
+                <div class="mx-2 flex items-center gap-x-[5px]">
+                    <div class="tooltip" :data-tip="'🔁'+repo.forks_count +' forked this repo'">
+                        <font-awesome-icon :icon="['fas', 'code-fork']" />
+                    </div>
+                    <p>{{ repo.forks_count }}</p>
+                </div>
+                <div class="mx-2 flex items-center gap-x-[5px]">
+                    <div class="tooltip" :data-tip="'👁️'+repo.watchers_count +' watcher on this repo'">
+                        <font-awesome-icon :icon="['far', 'eye']" />
+                    </div>
+                    <p>{{ repo.watchers_count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-else>
+        No Repository Available
+    </div>
+    <LoadMoreBtn :data="userRepository.data" :item-to-show="repoItemToShow" @loadMore="repoLoadMore" />
+</template>
