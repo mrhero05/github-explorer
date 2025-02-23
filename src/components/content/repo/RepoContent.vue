@@ -44,7 +44,7 @@
 
 <template>
     <div v-if="repoData" class="max-w-[400px] md:max-w-[1140px] mx-auto flex flex-wrap md:mt-[50px]">
-        <div class="flex gap-x-[20px] items-center justify-center md:justify-start w-full md:w-8/12">
+        <div class="flex flex-wrap gap-x-[20px] items-center justify-center md:justify-start w-full md:w-8/12">
             <img class="w-[80px] rounded-full" :src="repoData.owner.avatar_url" alt="Github User Profile">
             <div class="flex flex-col">
                 <p class="font-MontserratBold text-[2rem] line-clamp-1">{{ repoData.name }}</p>
