@@ -16,10 +16,8 @@
                 axios.get(`https://api.github.com/repos/${repoName}/contents`)
             ]);
             repoFile.value = getRepoFile.data;
-
             // group the repoFile Type
-            console.log(repoFile.value);
-            groupRepoFile = groupFile(getRepoFile.data);
+            groupRepoFile.value = groupFile(repoFile.value);
 
         } catch (error) {
             console.log(error);
@@ -35,6 +33,7 @@
     const groupFile = (data) =>{
         const files = ref([]);
         const dir = ref([]);
+        const groupedData = ref([]);
         data.forEach(element => {
             if(element.type == 'dir'){
                 dir.value.push(element);
@@ -42,8 +41,8 @@
                 files.value.push(element);
             }
         });
-        groupRepoFile.value = [...dir.value, ...files.value];
-        return groupRepoFile.value;
+        groupedData.value = [...dir.value, ...files.value];
+        return groupedData.value;
     }
 
     onMounted(() => {
@@ -57,8 +56,8 @@
         <p class="">File Explorer</p>
         <p class="ml-auto md:mr-[100px]">Default Branch: <span class="font-MontserratBold -text--ge-gray2">{{ defaultBranch }}</span></p>
     </div>
-    <div class="w-full">
-        <div class="overflow-x-auto">
+    <div class="w-full h-[600px] overflow-auto">
+        <div class="overflow-x-auto my-5">
             <table class="table">
                 <thead>
                 <tr>
@@ -69,9 +68,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="files in groupRepoFile">
+                    <tr v-for="files in groupRepoFile" class="hover">
                         <td><font-awesome-icon class="text-[1.5rem]" :icon="files.type == 'file' ? ['fas', 'file-lines'] : ['fas', 'folder-open']" /></td>
-                        <td>{{ files.name }}</td>
+                        <td><a :href="files.type == 'file' ? files.download_url : files.html_url" class="hover:underline" target="_blank">{{ files.name }}</a></td>
                         <td>{{ files.type }}</td>
                         <td>{{ files.size }} kb</td>
                     </tr>

@@ -59,8 +59,9 @@
             <div class="flex w-full flex-col">
                 <div class="divider divider-start">{{ event.formatted_date }}</div>
             </div>
-            <div class="flex w-full gap-x-[20px]">
-                <div class="divider divider-horizontal"><font-awesome-icon :icon="['fas', 'code-pull-request']" /></div>
+            <div class="flex w-full gap-x-[20px] overflow-auto">
+                <div class="divider divider-horizontal"><font-awesome-icon :icon="['fas', 'code-pull-request']" />
+                </div>
                 <div v-for="commit in event.payload.commits" class="flex flex-col">
                     <p>Author: {{ event.actor.display_login }}</p>
                     <p>Commit message: <span class="font-bold">{{ commit.message }}</span></p>

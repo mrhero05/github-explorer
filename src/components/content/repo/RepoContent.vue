@@ -1,7 +1,9 @@
 <script setup>
     import { defineProps, ref, onMounted, watch } from 'vue';
     import RepoFile from '@/components/content/repo/RepoFile.vue';
+    import RepoAbout from '@/components/content/repo/RepoAbout.vue';
     import axios from 'axios';
+    import RepoRelease from '@/components/content/repo/RepoRelease.vue';
 
     const props = defineProps({
         repoName: String,
@@ -10,6 +12,8 @@
     const repoData = ref(null);
     const repoLanguanges = ref(null);
     const repoDefBranch = ref('');
+    const repoAbout = ref('');
+    const repoRelease = ref('');
 
     const fetch = async (repoName) => {
         try {
@@ -25,6 +29,7 @@
             repoData.value = getRepoInfo.data;
             repoLanguanges.value = getRepoLanguages.data;
             repoDefBranch.value = repoData.value.default_branch;
+            repoAbout.value = repoData.value.description;
 
         } catch (error) {
             console.log(error);
@@ -69,12 +74,13 @@
         <section class="flex flex-row flex-wrap gap-[10px] my-4">
             <p class="-bg--ge-white-gray p-[1px_20px] rounded-[15px]" v-for="(lang, langIndex) in repoLanguanges" :key="langIndex">{{ langIndex }}</p>
         </section>
-        <section class="flex w-full my-4 flex-wrap">
-            <div class="w-full md:w-8/12">
+        <section class="flex w-full my-4 flex-wrap gap-x-[40px]">
+            <div class="w-full md:w-[calc(66.6%-20px)]">
                 <RepoFile :default-branch="repoDefBranch" :repo-name="repoName" />
             </div>
-            <div class="w-full md:w-4/12">
-                <p>About</p>
+            <div class="w-full md:w-[calc(33.3%-20px)] my-5 md:my-0">
+                <RepoAbout :repo-about="repoAbout" />
+                <RepoRelease :repo-name="repoName" />
             </div>
         </section>
     </div>
