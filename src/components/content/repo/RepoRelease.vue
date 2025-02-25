@@ -18,14 +18,16 @@
             ]);
             repoReleases.value = getReleases.data;
             repoReleaseDate.value = formatDate(repoReleases.value);
-            console.log(formatDate(repoReleases.value));
+            // console.log(repoReleases.value);
         } catch (error) {
             console.log(error);
         }
     }
 
     const formatDate = (repoReleases) =>{
-        return moment(repoReleases[0].published_at).format('MMMM D, YYYY');
+        if (repoReleases[0]) {
+            return moment(repoReleases[0].published_at).format('MMMM D, YYYY');
+        }
     }
 
     watch(() => props.repoName, (newrepoName) =>{
@@ -40,13 +42,13 @@
 </script>
 
 <template>
-    <p>Releases <span v-if="!repoReleases.length == 0" class="rounded-badge -bg--ge-gray2 px-2 -text--ge-white">{{ repoReleases.length }}</span></p>
+    <p>Releases</p>
 
     <p v-if="!repoReleases.length == 0" class="-text--ge-gray2 flex flex-wrap gap-x-[10px] items-center">
         <font-awesome-icon :icon="['fas', 'tag']" class="-text--ge-light-green text-[1.2rem]" />
-        {{ repoReleases[0].name }}{{ repoReleases.length - 1 }}
+        {{ repoReleases[0].name }}
         <span class="border -border--ge-light-green rounded-badge p-[2px_8px] text-[0.8rem] -text--ge-light-green">Latest</span>
-        <span>on {{ repoReleaseDate }}</span>
+        <p class="w-full text-[0.8rem]">on {{ repoReleaseDate }}</p>
     </p>
     <p v-else class="-text--ge-gray2">No releases published</p>
 

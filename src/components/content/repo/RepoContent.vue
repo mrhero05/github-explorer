@@ -4,6 +4,7 @@
     import RepoAbout from '@/components/content/repo/RepoAbout.vue';
     import axios from 'axios';
     import RepoRelease from '@/components/content/repo/RepoRelease.vue';
+    import JsonColors from '@/assets/colors.json'
 
     const props = defineProps({
         repoName: String,
@@ -13,7 +14,9 @@
     const repoLanguanges = ref(null);
     const repoDefBranch = ref('');
     const repoAbout = ref('');
-    const repoRelease = ref('');
+    const repoStarCount = ref('');
+    const repoForkCount = ref('');
+    const repoWatcherCount = ref('');
 
     const fetch = async (repoName) => {
         try {
@@ -30,10 +33,21 @@
             repoLanguanges.value = getRepoLanguages.data;
             repoDefBranch.value = repoData.value.default_branch;
             repoAbout.value = repoData.value.description;
+            repoStarCount.value = repoData.value.stargazers_count;
+            repoForkCount.value = repoData.value.forks_count;
+            repoWatcherCount.value = repoData.value.watchers_count;
+            languageColors(JsonColors, repoLanguanges.value);
 
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const languageColors = (JsonColors, languages) =>{
+        const langKeys = Object.keys(languages);
+
+        const getColors = langKeys.map((element) => JsonColors[element]);
+        console.log(getColors);
     }
 
     watch( () => props.repoName, (newrepoName) =>{
@@ -58,21 +72,25 @@
             <p class="border -border--ge-gray rounded-[50px] px-[10px] -text--ge-gray mx-5">{{ repoData.visibility }}</p>
         </div>
         <div class="flex ml-auto gap-x-[20px] w-full md:w-4/12 justify-center md:justify-start my-4">
-            <div class="tooltip hover:cursor-pointer mx-2 flex items-center gap-x-[5px]" :data-tip="'⭐'+' starred this repo'">
+            <div class="tooltip hover:cursor-pointer mx-2 flex items-center gap-x-[5px]" :data-tip="'⭐ '+ repoStarCount +' starred this repo'">
                 <font-awesome-icon :icon="['far', 'star']" />
-                <p>Starred 0</p>
+                <p>Starred {{ repoStarCount }}</p>
             </div>
-            <div class="tooltip hover:cursor-pointer mx-2 flex items-center gap-x-[5px]" :data-tip="'🔁'+' forked this repo'">
+            <div class="tooltip hover:cursor-pointer mx-2 flex items-center gap-x-[5px]" :data-tip="'🔁 '+ repoForkCount +' forked this repo'">
                 <font-awesome-icon :icon="['fas', 'code-fork']" />
-                <p>Fork 0</p>
+                <p>Fork {{ repoForkCount }}</p>
             </div>
-            <div class="tooltip hover:cursor-pointer mx-2 flex items-center gap-x-[5px]" :data-tip="'👁️'+' watcher on this repo'">
+            <div class="tooltip hover:cursor-pointer mx-2 flex items-center gap-x-[5px]" :data-tip="'👁️ '+ repoWatcherCount +' watcher on this repo'">
                 <font-awesome-icon :icon="['far', 'eye']" />
-                <p>Watching 1</p>
+                <p>Watching {{ repoWatcherCount }}</p>
             </div>
         </div>
         <section class="flex flex-row flex-wrap gap-[10px] my-4">
-            <p class="-bg--ge-white-gray p-[1px_20px] rounded-[15px]" v-for="(lang, langIndex) in repoLanguanges" :key="langIndex">{{ langIndex }}</p>
+            <p class="-bg--ge-white-gray p-[1px_20px] rounded-[15px]"
+            v-for="(lang, langIndex) in repoLanguanges" :key="langIndex"
+            >
+                {{ langIndex }}
+            </p>
         </section>
         <section class="flex w-full my-4 flex-wrap gap-x-[40px]">
             <div class="w-full md:w-[calc(66.6%-20px)]">

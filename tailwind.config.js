@@ -21,6 +21,7 @@ export default {
         '--ge-pink': '#E069F7',
         '--ge-white': '#ffffff',
         '--ge-black': '#000000',
+        '--ge-l-yellow': '#ffd600',
     },
     extend: {
         fontFamily: {
