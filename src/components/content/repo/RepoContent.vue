@@ -30,13 +30,14 @@
 
             // Set data per variables
             repoData.value = getRepoInfo.data;
-            repoLanguanges.value = getRepoLanguages.data;
             repoDefBranch.value = repoData.value.default_branch;
             repoAbout.value = repoData.value.description;
             repoStarCount.value = repoData.value.stargazers_count;
             repoForkCount.value = repoData.value.forks_count;
             repoWatcherCount.value = repoData.value.watchers_count;
-            languageColors(JsonColors, repoLanguanges.value);
+            repoLanguanges.value = languageColors(JsonColors, getRepoLanguages.data);
+            // console.log(repoData.value);
+
 
         } catch (error) {
             console.log(error);
@@ -45,9 +46,10 @@
 
     const languageColors = (JsonColors, languages) =>{
         const langKeys = Object.keys(languages);
-
-        const getColors = langKeys.map((element) => JsonColors[element]);
-        console.log(getColors);
+        const getColors = langKeys.map((element) => ({
+            [element] : JsonColors[element]
+        }));
+        return getColors;
     }
 
     watch( () => props.repoName, (newrepoName) =>{
@@ -66,8 +68,10 @@
         <div class="flex flex-wrap gap-x-[20px] items-center justify-center md:justify-start w-full md:w-8/12">
             <img class="w-[80px] rounded-full" :src="repoData.owner.avatar_url" alt="Github User Profile">
             <div class="flex flex-col">
-                <p class="font-MontserratBold text-[2rem] line-clamp-1">{{ repoData.name }}</p>
-                <p class="">{{ repoData.owner.login }}</p>
+                <a :href="repoData.html_url" target="_blank"
+                class="font-MontserratBold text-[2rem] line-clamp-1 hover:underline">
+                {{ repoData.name }}</a>
+                <a :href="repoData.owner.html_url" target="_blank" class="hover:underline">{{ repoData.owner.login }}</a>
             </div>
             <p class="border -border--ge-gray rounded-[50px] px-[10px] -text--ge-gray mx-5">{{ repoData.visibility }}</p>
         </div>
@@ -86,10 +90,14 @@
             </div>
         </div>
         <section class="flex flex-row flex-wrap gap-[10px] my-4">
-            <p class="-bg--ge-white-gray p-[1px_20px] rounded-[15px]"
+            <p class="-bg--ge-white-gray -text--ge-black p-[1px_20px] rounded-[15px]"
             v-for="(lang, langIndex) in repoLanguanges" :key="langIndex"
+            :style="{
+                backgroundColor: Object.values(lang)[0],
+                color: Object.values(lang)[0] ? 'white' : 'black'
+                }"
             >
-                {{ langIndex }}
+                {{ Object.keys(lang)[0] }}
             </p>
         </section>
         <section class="flex w-full my-4 flex-wrap gap-x-[40px]">

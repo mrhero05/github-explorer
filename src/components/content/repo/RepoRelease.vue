@@ -18,7 +18,7 @@
             ]);
             repoReleases.value = getReleases.data;
             repoReleaseDate.value = formatDate(repoReleases.value);
-            // console.log(repoReleases.value);
+            console.log(repoReleases.value);
         } catch (error) {
             console.log(error);
         }
@@ -44,12 +44,13 @@
 <template>
     <p>Releases</p>
 
-    <p v-if="!repoReleases.length == 0" class="-text--ge-gray2 flex flex-wrap gap-x-[10px] items-center">
+    <div v-if="!repoReleases.length == 0" class="-text--ge-gray2 flex flex-wrap gap-x-[10px] items-center">
         <font-awesome-icon :icon="['fas', 'tag']" class="-text--ge-light-green text-[1.2rem]" />
-        {{ repoReleases[0].name }}
+        <a :href="repoReleases[0].html_url" target="_blank"
+        class="hover:underline">{{ repoReleases[0].name }}</a>
         <span class="border -border--ge-light-green rounded-badge p-[2px_8px] text-[0.8rem] -text--ge-light-green">Latest</span>
         <p class="w-full text-[0.8rem]">on {{ repoReleaseDate }}</p>
-    </p>
+    </div>
     <p v-else class="-text--ge-gray2">No releases published</p>
 
     <hr class="-border--ge-gray2 my-5 px-5">
