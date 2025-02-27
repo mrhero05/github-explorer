@@ -5,13 +5,15 @@
     import axios from 'axios';
     import RepoRelease from '@/components/content/repo/RepoRelease.vue';
     import JsonColors from '@/assets/colors.json'
+    import RepoLanguages from '@/components/content/repo/RepoLanguages.vue';
 
     const props = defineProps({
         repoName: String,
     })
 
     const repoData = ref(null);
-    const repoLanguanges = ref(null);
+    const repoLanguagesColor = ref(null);
+    const repoLangData = ref([]);
     const repoDefBranch = ref('');
     const repoAbout = ref('');
     const repoStarCount = ref('');
@@ -35,9 +37,9 @@
             repoStarCount.value = repoData.value.stargazers_count;
             repoForkCount.value = repoData.value.forks_count;
             repoWatcherCount.value = repoData.value.watchers_count;
-            repoLanguanges.value = languageColors(JsonColors, getRepoLanguages.data);
-            // console.log(repoData.value);
-
+            repoLanguagesColor.value = languageColors(JsonColors, getRepoLanguages.data);
+            repoLangData.value = getRepoLanguages.data;
+            // console.log(getRepoLanguages.data);
 
         } catch (error) {
             console.log(error);
@@ -91,7 +93,7 @@
         </div>
         <section class="flex flex-row flex-wrap gap-[10px] my-4">
             <p class="-bg--ge-white-gray -text--ge-black p-[1px_20px] rounded-[15px]"
-            v-for="(lang, langIndex) in repoLanguanges" :key="langIndex"
+            v-for="(lang, langIndex) in repoLanguagesColor" :key="langIndex"
             :style="{
                 backgroundColor: Object.values(lang)[0],
                 color: Object.values(lang)[0] ? 'white' : 'black'
@@ -107,6 +109,7 @@
             <div class="w-full md:w-[calc(33.3%-20px)] my-5 md:my-0">
                 <RepoAbout :repo-about="repoAbout" />
                 <RepoRelease :repo-name="repoName" />
+                <RepoLanguages :repo-name="repoName" :repo-languages-data="repoLangData" :repo-languages-color="repoLanguagesColor" />
             </div>
         </section>
     </div>

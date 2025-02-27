@@ -18,7 +18,7 @@
             ]);
             repoReleases.value = getReleases.data;
             repoReleaseDate.value = formatDate(repoReleases.value);
-            console.log(repoReleases.value);
+            // console.log(repoReleases.value);
         } catch (error) {
             console.log(error);
         }
