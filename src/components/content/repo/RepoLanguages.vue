@@ -8,13 +8,13 @@
     });
 
     let repoLanguageFinalData = ref([]);
+    let repoTotalPercentage = ref();
 
     const getLanguageData = (repoLanguagesColor, repoLanguagesData) =>{
         repoLanguageFinalData.value = repoLanguagesColor.map(lang =>{
             const langName = Object.keys(lang)[0];
             const langColor = Object.values(lang)[0];
-            // const langPercentage = repoLanguagesData[langName];
-            const langPercentage = getLanguagePercentage();
+            const langPercentage = getLanguagePercentage(repoLanguagesData[langName]);
             return {
                 language : langName,
                 percentage : langPercentage,
@@ -25,8 +25,8 @@
 
     }
 
-    const getLanguagePercentage = () =>{
-        return 1;
+    const getLanguagePercentage = (value) =>{
+        return value;
     }
 
     watch(() => props.repoName, (newRepoName) =>{
@@ -47,5 +47,11 @@
         v-if="repoLanguageFinalData"
         :style="{backgroundColor: repoData.color}"
         v-for="repoData in repoLanguageFinalData" :key="repoData"></div>
+    </div>
+    <div class="flex">
+        <div v-for="repoData in repoLanguageFinalData" :key="repoData">
+            <p>{{ repoData.language }}</p>
+            <p>{{ repoData.percentage }}</p>
+        </div>
     </div>
 </template>
