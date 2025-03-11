@@ -7,6 +7,7 @@
     import JsonColors from '@/assets/colors.json'
     import RepoLanguages from '@/components/content/repo/RepoLanguages.vue';
     import RepoContributors from '@/components/content/repo/RepoContributors.vue';
+    import RepoReadme from '@/components/content/repo/RepoReadme.vue';
 
     const props = defineProps({
         repoName: String,
@@ -20,6 +21,7 @@
     const repoStarCount = ref('');
     const repoForkCount = ref('');
     const repoWatcherCount = ref('');
+    const repoContributors = ref('');
 
     const fetch = async (repoName) => {
         try {
@@ -40,7 +42,8 @@
             repoWatcherCount.value = repoData.value.watchers_count;
             repoLanguagesColor.value = languageColors(JsonColors, getRepoLanguages.data);
             repoLangData.value = getRepoLanguages.data;
-            // console.log(getRepoLanguages.data);
+            repoContributors.value = repoData.value.contributors_url;
+            // console.log(repoContributors.value);
 
         } catch (error) {
             console.log(error);
@@ -106,12 +109,14 @@
         <section class="flex w-full my-4 flex-wrap gap-x-[40px]">
             <div class="w-full md:w-[calc(66.6%-20px)]">
                 <RepoFile :default-branch="repoDefBranch" :repo-name="repoName" />
+                <RepoReadme />
             </div>
             <div class="w-full md:w-[calc(33.3%-20px)] my-5 md:my-0">
                 <RepoAbout :repo-about="repoAbout" />
                 <RepoRelease :repo-name="repoName" />
                 <RepoLanguages :repo-name="repoName" :repo-languages-data="repoLangData" :repo-languages-color="repoLanguagesColor" />
-                <RepoContributors :repo-name="repoName" />
+                <RepoContributors :repo-name="repoName"
+                :repo-contributors-url="repoContributors" />
             </div>
         </section>
     </div>

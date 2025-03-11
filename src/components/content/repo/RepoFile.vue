@@ -53,7 +53,7 @@
 
 <template>
     <div class="flex">
-        <p class="">File Explorer</p>
+        <p class="font-MontserratBold">File Explorer</p>
         <p class="ml-auto md:mr-[100px]">Default Branch: <span class="font-MontserratBold -text--ge-gray2">{{ defaultBranch }}</span></p>
     </div>
     <div class="w-full h-[600px] overflow-auto">

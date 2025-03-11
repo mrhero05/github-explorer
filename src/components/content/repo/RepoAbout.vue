@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <p>About</p>
+    <p class="font-MontserratBold">About</p>
     <div class="p-5 border -border--ge-gray2 rounded-[5px] my-5">
         <p class="-text--ge-gray2">{{ repoAbout }}</p>
     </div>

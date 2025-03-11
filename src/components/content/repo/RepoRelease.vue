@@ -42,7 +42,7 @@
 </script>
 
 <template>
-    <p>Releases</p>
+    <p class="font-MontserratBold">Releases</p>
 
     <div v-if="!repoReleases.length == 0" class="-text--ge-gray2 flex flex-wrap gap-x-[10px] items-center">
         <font-awesome-icon :icon="['fas', 'tag']" class="-text--ge-light-green text-[1.2rem]" />
