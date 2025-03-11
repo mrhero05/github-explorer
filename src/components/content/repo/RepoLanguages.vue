@@ -31,7 +31,7 @@
     }
 
     const getLanguagePercentage = (value, total) =>{
-        return (value / total) * 100;
+        return parseFloat((value / total) * 100).toFixed(1);
     }
 
     watch(() => props.repoLanguagesColor,
@@ -48,6 +48,7 @@
 </script>
 
 <template>
+    <p>Languages</p>
     <div class="flex h-4 w-full -bg--ge-light-gray rounded-full overflow-hidden">
         <div class="h-full"
         v-if="repoLanguageFinalData"
@@ -57,10 +58,14 @@
         }"
         v-for="repoData in repoLanguageFinalData" :key="repoData.language"></div>
     </div>
-    <div class="flex">
-        <div v-for="repoData in repoLanguageFinalData" :key="repoData.language">
+    <div class="flex flex-wrap items-center justify-center">
+        <div class="flex gap-x-[5px] items-center mx-[20px] my-[5px]" v-for="repoData in repoLanguageFinalData" :key="repoData.language">
+            <span class="w-[10px] h-[10px] rounded-full -bg--ge-light-gray"
+            :style="{ backgroundColor: repoData.color }"
+            ></span>
             <p>{{ repoData.language }}</p>
-            <p>{{ repoData.percentage }}</p>
+            <p class="-text--ge-gray">{{ repoData.percentage }} %</p>
         </div>
     </div>
+    <hr class="-border--ge-gray2 my-5 px-5">
 </template>

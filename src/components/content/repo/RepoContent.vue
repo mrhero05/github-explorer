@@ -6,6 +6,7 @@
     import RepoRelease from '@/components/content/repo/RepoRelease.vue';
     import JsonColors from '@/assets/colors.json'
     import RepoLanguages from '@/components/content/repo/RepoLanguages.vue';
+    import RepoContributors from '@/components/content/repo/RepoContributors.vue';
 
     const props = defineProps({
         repoName: String,
@@ -110,6 +111,7 @@
                 <RepoAbout :repo-about="repoAbout" />
                 <RepoRelease :repo-name="repoName" />
                 <RepoLanguages :repo-name="repoName" :repo-languages-data="repoLangData" :repo-languages-color="repoLanguagesColor" />
+                <RepoContributors :repo-name="repoName" />
             </div>
         </section>
     </div>
