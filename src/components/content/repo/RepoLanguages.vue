@@ -49,7 +49,7 @@
 
 <template>
     <p class="font-MontserratBold">Languages</p>
-    <div class="flex h-4 w-full -bg--ge-light-gray rounded-full overflow-hidden">
+    <div class="flex h-4 w-full -bg--ge-light-gray rounded-full overflow-hidden my-[10px]">
         <div class="h-full"
         v-if="repoLanguageFinalData"
         :style="{

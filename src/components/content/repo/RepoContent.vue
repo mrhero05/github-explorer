@@ -43,7 +43,7 @@
             repoLanguagesColor.value = languageColors(JsonColors, getRepoLanguages.data);
             repoLangData.value = getRepoLanguages.data;
             repoContributors.value = repoData.value.contributors_url;
-            // console.log(repoContributors.value);
+            console.log(repoData.value);
 
         } catch (error) {
             console.log(error);
@@ -109,7 +109,6 @@
         <section class="flex w-full my-4 flex-wrap gap-x-[40px]">
             <div class="w-full md:w-[calc(66.6%-20px)]">
                 <RepoFile :default-branch="repoDefBranch" :repo-name="repoName" />
-                <RepoReadme />
             </div>
             <div class="w-full md:w-[calc(33.3%-20px)] my-5 md:my-0">
                 <RepoAbout :repo-about="repoAbout" />
@@ -117,6 +116,9 @@
                 <RepoLanguages :repo-name="repoName" :repo-languages-data="repoLangData" :repo-languages-color="repoLanguagesColor" />
                 <RepoContributors :repo-name="repoName"
                 :repo-contributors-url="repoContributors" />
+            </div>
+            <div class="w-full">
+                <RepoReadme :repo-name="repoName" />
             </div>
         </section>
     </div>

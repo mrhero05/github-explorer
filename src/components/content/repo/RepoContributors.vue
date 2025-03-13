@@ -14,8 +14,8 @@
             axios.get(repoContributorsUrl),
         ]);
         repoContributors.value = getContributors.data;
-        console.log(repoContributorsUrl);
-        console.log(repoContributors.value);
+        // console.log(repoContributorsUrl);
+        // console.log(repoContributors.value);
 
     }
 

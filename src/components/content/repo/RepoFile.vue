@@ -56,8 +56,8 @@
         <p class="font-MontserratBold">File Explorer</p>
         <p class="ml-auto md:mr-[100px]">Default Branch: <span class="font-MontserratBold -text--ge-gray2">{{ defaultBranch }}</span></p>
     </div>
-    <div class="w-full h-[600px] overflow-auto">
-        <div class="overflow-x-auto my-5">
+    <div class="w-full h-[600px] overflow-auto my-[20px]">
+        <div class="overflow-x-auto my-5 rounded-box border border-base-content/5 bg-base-100">
             <table class="table">
                 <thead>
                 <tr>
