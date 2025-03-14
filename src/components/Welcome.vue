@@ -8,7 +8,7 @@
                 <img src="@/assets/icons/rocket.png" alt="rocket">
             </div>
             <div data-aos="fade-right" data-aos-duration="1000">
-                <p>Unleash the power of GitHub with <strong>GitHub Explorer!</strong></p>
+                <p>Unleash the power of <a href="https://github.com/" class="hover:underline" target="_blank">GitHub</a> with <strong>GitHub Explorer!</strong></p>
                     <p>Explore, analyze, and interact with GitHub data like never before.</p>
             </div>
 

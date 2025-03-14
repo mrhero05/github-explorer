@@ -41,9 +41,15 @@
 </script>
 
 <template>
-    <div class="flex flex-col border -border--ge-gray shadow-[1px_1px_2px_1px_rgba(0,0,0,0.25)] p-[20px] rounded-[10px] w-full md:w-[calc(50%-10px)]" v-if="Array.isArray(userRepository.data) && userRepository.data.length > 0" v-for="repo in userRepository.data.slice(0, repoItemToShow)">
+    <div class="flex flex-col border -border--ge-gray shadow-[1px_1px_2px_1px_rgba(0,0,0,0.25)] p-[20px] rounded-[10px] w-full md:w-[calc(50%-10px)]" v-if="Array.isArray(userRepository.data) && userRepository.data.length > 0" v-for="repo in userRepository.data.slice(0, repoItemToShow)" data-aos="fade-left" data-aos-duration="2000">
         <div class="flex items-center gap-x-[10px]">
             <font-awesome-icon :icon="['fas', 'book-bookmark']" />
+            <!-- <router-link :to="{
+                name: 'RepoContent',
+                params: { repoName: repo.name}
+            }">
+            {{ repo.name }}
+            </router-link> -->
             <a :href="repo.html_url" target="_blank" class="-text--ge-light-blue text-[1.2rem] font-MontserratBold text-ellipsis overflow-hidden whitespace-nowrap hover:underline">{{ repo.name }}</a>
             <p class="ml-auto border -border--ge-gray rounded-[50px] px-[10px] -text--ge-gray">Public</p>
         </div>

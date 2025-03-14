@@ -50,7 +50,7 @@
 
 <template>
     <div class="max-w-[400px] md:max-w-[1140px] mx-auto flex flex-wrap md:mt-[50px]">
-        <div class="w-full md:w-3/12 p-[10px]">
+        <div class="w-full md:w-3/12 p-[10px]" data-aos="fade-right" data-aos-duration="2000">
             <div class="avatar w-full">
                 <div class="-ring--ge-gray ring-offset-base-100 w-full rounded-full ring ring-offset-2">
                     <img :src="avatar" alt="profile_logo" />
@@ -76,7 +76,7 @@
 
         </div>
         <div class="w-full md:w-9/12 p-[10px_20px]">
-            <div class="flex items-center gap-x-[10px] mb-4">
+            <div class="flex items-center gap-x-[10px] mb-4" data-aos="fade-right" data-aos-duration="2000">
                 <img class="w-[30px] h-[30px]" src="@/assets/icons/github-mark.png" alt="github_icon">
                 <p class="text-[1.5rem]">Repositories</p>
             </div>
