@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="my-[50px]">
+        <div class="my-[50px]" data-aos="fade-down" data-aos-duration="1000">
             <label class="input input-bordered flex items-center gap-2 shadow-[1px_1px_2px_1px_rgba(0,0,0,0.25)] rounded-[10px] w-[400px] max-w-[400px] m-auto p-[10px_40px]" onclick="searchModal.showModal()">
                 <font-awesome-icon class="-text--ge-icon-gray" :icon="['fas', 'magnifying-glass']" />
                 <input type="text" class="grow" placeholder="Search User or Repository" />

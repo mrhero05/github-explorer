@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <footer class="w-full pt-[50px]">
+    <footer class="w-full pt-[50px]" data-aos="fade" data-aos-duration="3000">
         <div class="text-center max-w-[700px] m-auto">
             <h2 class="text-[2rem] font-MontserratBold">Github Explorer</h2>
             <h4 class="text-[1rem] italic">"Find Users & Repositories with Ease"</h4>
