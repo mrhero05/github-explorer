@@ -9,7 +9,8 @@ lerna-debug.log*
 
 node_modules
 .DS_Store
-dist
+# add dist for github deploy
+# dist
 dist-ssr
 coverage
 *.local
