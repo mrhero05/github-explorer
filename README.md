@@ -14,7 +14,7 @@ To get started with GitHub Explorer, follow these steps:<br>
     1. Clone the repository: git clone [https://github.com/mrhero05/github-explorer.git](https://github.com/mrhero05/github-explorer.git)<br>
     2. Navigate to the project directory: `cd github-explorer`<br>
     3. Install dependencies: `npm install`<br>
-    4. Start the application on you local environment: `npm run dev`
+    4. Start the application on your local environment: `npm run dev`
 
 ## Demo
 Netlify : [https://vue-github-explorer.netlify.app/](https://vue-github-explorer.netlify.app/)
